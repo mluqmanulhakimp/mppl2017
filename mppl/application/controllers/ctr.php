@@ -14,15 +14,36 @@ class Ctr extends CI_Controller {
 
 	public function databukupage(){
 	    $data = $this->mymodel->getdatabuku('
-	    	select b.id_buku as id, b.judul as judul, b.edisi as edisi, b.pengarang as pengarang, k.nama_kategori as kategori
-	    	from buku b, kategori k
-	    	where k.id_kategori = b.kategori
+	    	select *
+	    	from stock_take_item s
 	    ');
+	    	// select b.id_buku as id, b.judul as judul, b.edisi as edisi, b.pengarang as pengarang, k.nama_kategori as kategori
+	    	// from buku b, kategori k
+	    	// where k.id_kategori = b.kategori
 		$this->load->view('data_buku', array('data' => $data));
 	}
 
 	public function insert_data_buku(){
 		$this->load->view('form_insert_data_buku');
+	}
+
+	public function detailbuku($itemid){
+		// $where = array(
+		// 	'id_buku' => $itemid
+		// );
+		$buku = $this->mymodel->getdatabuku("
+	    	select *
+	    	from stock_take_item
+	    	where item_id = '$itemid'
+	    ");
+	    $data = array(
+	    	"judul" => $buku[0]['title']
+	    );
+		$this->load->view('detail_buku', array('data' => $data));
+		// if($cek>=1){
+		// 	$this->load->helper('url');
+		// 	redirect('/ctr/databukupage');
+		// }
 	}
 
 	public function do_insert_buku(){
