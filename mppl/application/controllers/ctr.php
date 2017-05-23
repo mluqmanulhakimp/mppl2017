@@ -2,6 +2,14 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Ctr extends CI_Controller {
+	public function __construct(){
+        parent::__construct();
+        // konfigurasi helper & library
+        $this->load->helper('url');
+        $this->load->library('pagination');
+        $this->load->database();
+    }
+
 	public function index(){
 	    $data = $this->mymodel->getpeminjaman();   
 		$this->load->view('home', array('data' => $data));
@@ -13,14 +21,37 @@ class Ctr extends CI_Controller {
 	}
 
 	public function databukupage(){
-	    $data = $this->mymodel->getdatabuku('
-	    	select *
-	    	from stock_take_item s
-	    ');
-	    	// select b.id_buku as id, b.judul as judul, b.edisi as edisi, b.pengarang as pengarang, k.nama_kategori as kategori
-	    	// from buku b, kategori k
-	    	// where k.id_kategori = b.kategori
-		$this->load->view('data_buku', array('data' => $data));
+        $config['base_url']=base_url()."index.php/ctr/databukupage";
+            $config['total_rows']= $this->db->query("
+            	SELECT item_id, title, item_code
+				FROM stock_take_item")->num_rows();
+            $config['per_page']=10;
+        	$config['num_links'] = 6;
+            $config['uri_segment']=3;
+
+        $config['num_tag_open'] = '&nbsp&nbsp';
+        $config['num_tag_close'] = '&nbsp&nbsp';
+        $config['cur_tag_open'] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+        $config['cur_tag_close'] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+        // $config['next_tag_open'] = "<li>";
+        // $config['next_tagl_close'] = "</li>";
+        $config['prev_tag_open'] = "&nbsp&nbsp&nbsp";
+        // $config['prev_tagl_close'] = "</li>";
+        // $config['first_tag_open'] = "<li>";
+        // $config['first_tagl_close'] = "&nbsp</li>";
+        $config['last_tag_open'] = "&nbsp&nbsp&nbsp";
+        // $config['last_tagl_close'] = "</li>";
+
+            $config['first_link']='<< first';
+        $config['last_link']='last >>';
+        $config['next_link']='next >';
+        $config['prev_link']='< before';
+            $this->pagination->initialize($config);
+ 
+        // konfigurasi model dan view untuk menampilkan data
+        $this->load->model('mymodel');
+        $data['databuku']=$this->mymodel->getdatabuku($config);
+        $this->load->view('data_buku', $data);
 	}
 
 	public function insert_data_buku(){
@@ -28,22 +59,30 @@ class Ctr extends CI_Controller {
 	}
 
 	public function detailbuku($itemid){
-		// $where = array(
-		// 	'id_buku' => $itemid
-		// );
-		$buku = $this->mymodel->getdatabuku("
-	    	select *
-	    	from stock_take_item
-	    	where item_id = '$itemid'
+		$buku = $this->mymodel->getdetailbuku("
+	    	select a.title as title, a.item_code as item_code, c.publish_year as publish_year, f.language_name as language_name, g.place_name as place_name, c.classification as classification, d.publisher_name as publisher_name, e.coll_type_name as jenis
+
+	    	from stock_take_item a, item b, biblio c, mst_publisher d, mst_coll_type e, mst_language f, mst_place g
+
+	    	where a.item_id = '$itemid'
+	    		and a.item_id = b.item_id
+		    	and b.biblio_id = c.biblio_id
+		    	and c.publisher_id = d.publisher_id
+		    	and b.coll_type_id = e.coll_type_id
+		    	and c.language_id = f.language_id
+		    	and c.publish_place_id = g.place_id
 	    ");
 	    $data = array(
-	    	"judul" => $buku[0]['title']
+	    	"judul" => $buku[0]['title'],
+	    	"kode" => $buku[0]['item_code'],
+	    	"tahun" => $buku[0]['publish_year'],
+	    	"bahasa" => $buku[0]['language_name'],
+	    	"tempat" => $buku[0]['place_name'],
+	    	"klasifikasi" => $buku[0]['classification'],
+	    	"penerbit" => $buku[0]['publisher_name'],
+	    	"jenis" => $buku[0]['jenis']
 	    );
 		$this->load->view('detail_buku', array('data' => $data));
-		// if($cek>=1){
-		// 	$this->load->helper('url');
-		// 	redirect('/ctr/databukupage');
-		// }
 	}
 
 	public function do_insert_buku(){
@@ -64,6 +103,11 @@ class Ctr extends CI_Controller {
 			redirect('/ctr/databukupage');
 		}
 	}
+
+
+
+
+
 
 	public function insert_data_peminjaman(){
 		$this->load->view('form_insert_data_peminjaman');
@@ -102,9 +146,9 @@ class Ctr extends CI_Controller {
 
 	public function delete_data($id_peminjaman){
 		$where = array(
-			'id_peminjaman' => $id_peminjaman
+			'loan_id' => $id_peminjaman
 		);
-		$cek = $this->mymodel->deletedata('peminjaman',$where);
+		$cek = $this->mymodel->deletedata('loan',$where);
 		if($cek>=1){
 			$this->load->helper('url');
 			redirect('/ctr/index');
@@ -160,6 +204,13 @@ class Ctr extends CI_Controller {
 	}
 
 	public function search_peminjaman(){
+		$cari = $this->input->get('cari');
+		// echo $cari;
+		$search = $this->mymodel->searchpeminjaman($cari);
+		$this->load->view('home', array('data' => $search));
+	}
+
+	public function search_buku(){
 		$cari = $this->input->get('cari');
 		// echo $cari;
 		$search = $this->mymodel->searchpeminjaman($cari);

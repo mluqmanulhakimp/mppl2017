@@ -47,7 +47,7 @@
   <div style="background: #6E6E6E;height: 54px;width: 100%">
     <a style="font-size: 33px;padding-left: 20px;color: #f7f7f7;"><font face="Times New Roman"> Data Buku RBTC</font></a>
     <div class="dropdown" style="margin-right: 16px;margin-top: 5px;float: right;">
-    <button class="dropbtn"><i style=""></i>Admin</button>
+    <button class="dropbtn">Admin</button>
       <div class="dropdown-content">
         <a href="#">Profil</a>
         <a href="#">Keluar</a>
@@ -61,38 +61,57 @@
     <img src="http://localhost/mppl/img/lib.jpg" style="height: 200px; width: 975px;margin-top: 17px;">
     
     <!--ISI-->
-      <table border="1" style="border-collapse: collapse;width: 100%;">
+      <table border="1" style="border-collapse: collapse;width: 100%;" class='table table-stripped table-bordered'>
       <div style="padding-top: 20px; padding-bottom: 20px">
-        <i>Cari berdasarkan...</i>
         <form method="get" action="<?php echo "http://localhost/mppl/index.php/ctr/search_peminjaman/"?>">
-          <input type="text" class="textinput" name="cari" placeholder="Judul/Pengarang/Kategori" style="width: 300px"><input type="submit" value="search" class="button">
+          <input type="text" class="textinput" name="cari" placeholder=" Cari berdasarkan..." style="width: 300px"><input type="submit" value="search" class="button">
         </form>
       </div>
       <h3 style="text-align: center;"></h3>
         <tr style="background: #C9C9C9;">
-          <th width="16%" style="padding-top: 10px;padding-bottom: 10px">Judul</th>
-          <th width="" style="padding-top: 10px;padding-bottom: 10px">Edisi</th> 
+          <th width="4%" style="padding-top: 10px;padding-bottom: 10px">No.</th>
+          <th width="" style="padding-top: 10px;padding-bottom: 10px">Judul</th> 
+          <th width="16%" style="padding-top: 10px;padding-bottom: 10px">Kode</th>
           <!-- <th width="25%">Pengarang</th>
           <th width="25%">Kategori</th> -->
-          <th width="13%">Action</th>
+          <th width="">Detail</th>
         </tr>
         <tbody style="background: #FCFCFC;">
-          <?php foreach($data as $row): ?>
+          <!-- <?php foreach($data as $row): ?>
           <tr>   
-              <td style="padding-left: 10px"><?php echo $row['item_code']; ?></td>
-              <td style="text-align: center;"><?php echo $row['title']; ?></td>
+              <td style="text-align: center;"><?php echo $row['jumlah']; ?></td>
+              <td style="padding-left: 10px;"><?php echo $row['title']; ?></td>
               <td style="text-align: center;">
-                <!-- <a href="<?php echo "http://localhost/mppl/index.php/ctr/edit_data_buku/".$row['id'];?>"><button type="button">Ubah</button></a> 
-                <a href="<?php echo "http://localhost/mppl/index.php/ctr/delete_data_buku/".$row['id'];?>"><button type="button">Hapus</button></a> -->
+                <a href="<?php echo "http://localhost/mppl/index.php/ctr/edit_data_buku/".$row['id'];?>"><button type="button">Ubah</button></a> 
+                <a href="<?php echo "http://localhost/mppl/index.php/ctr/delete_data_buku/".$row['id'];?>"><button type="button">Hapus</button></a>
                 <a href="<?php echo "http://localhost/mppl/index.php/ctr/detailbuku/".$row['item_id'];?>"><button type="button">Detail</button></a> 
               </td>
           </tr>
-          <?php endforeach; ?>
+          <?php endforeach; ?> -->
+
+          <?php
+              $num = $this->uri->segment('3') + 1;
+              $no=1;
+              foreach ($databuku as $row) {
+          ?>
+          <tr>
+              <td align="center"><?php echo $num++; ?></td>
+              <td style="padding: 10px;"><?php echo $row->title; ?></td>
+              <td align="center"><?php echo $row->item_code; ?></td>
+              <td style="padding: 5px"><a href="<?php echo "http://localhost/mppl/index.php/ctr/detailbuku/".$row->item_id;?>"><button type="button">Detail</button></a> 
+              </td>
+          </tr>
+          <?php } ?>
+
         </tbody>
       </table>
 
-    <div  class="w3-section w3-bottombar w3-padding-16" align="center">
-      <a href="<?php echo "http://localhost/mppl/index.php/ctr/insert_data_buku/";?>"><button style="" name="subject" type="submit" value="HTML">Tambah Data Buku</button></a>
+    <div class="w3-section w3-bottombar w3-padding-16" align="center">
+      <!-- <a href="<?php echo "http://localhost/mppl/index.php/ctr/insert_data_buku/";?>"><button style="" name="subject" type="submit" value="HTML">Tambah Data Buku</button></a> -->
+        <h5>Halaman</h5>
+        <h5>
+        <?php echo $this->pagination->create_links(); ?>
+        </h5>
     </div>
     <!--end ISI-->
 

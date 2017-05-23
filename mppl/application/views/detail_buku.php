@@ -45,7 +45,7 @@
 
   <!-- Navigationbar -->
   <div style="background: #6E6E6E;height: 54px;width: 100%">
-    <a style="font-size: 33px;padding-left: 20px;color: #f7f7f7;"><font face="Times New Roman"> Data Buku RBTC</font></a>
+    <a style="font-size: 33px;padding-left: 20px;color: #f7f7f7;"><font face="Times New Roman"> Detail Buku</font></a>
     <div class="dropdown" style="margin-right: 16px;margin-top: 5px;float: right;">
     <button class="dropbtn"><i style=""></i>Admin</button>
       <div class="dropdown-content">
@@ -61,19 +61,61 @@
     <img src="http://localhost/mppl/img/lib.jpg" style="height: 200px; width: 975px;margin-top: 17px;">
     
     <!--ISI-->
-    <div align="center">
+    <!-- <div align="center">
       <h2>- Detail Buku -</h2>
       <h3>
         <?php
-          echo $data['judul'];
+          echo $data['kode'];
           // foreach($data as $row):
           // endforeach;
         ?>
       </h3>
+    </div> -->
+
+    <div class="w3-section w3-topbar w3-padding-16;3-section w3-padding-16">
+        <table>
+          <tr>
+            <td>Judul Buku</td>
+            <td style="padding-left: 50px">: <?php echo $data['judul'] ?></td>
+          </tr>
+          <tr>
+            <td>Jenis Buku</td>
+            <td style="padding-left: 50px">: <?php echo $data['jenis'] ?></td>
+          </tr>
+          <tr>
+            <td>Kode Buku</td>
+            <td style="padding-left: 50px">: <?php echo $data['kode'] ?></td>
+          </tr>
+          <tr>
+            <td>Kode Klasifikasi</td>
+            <td style="padding-left: 50px">: <?php echo $data['klasifikasi'] ?></td>
+          </tr>
+          <tr>
+            <td>Bahasa</td>
+            <td style="padding-left: 50px">: <?php echo $data['bahasa'] ?></td>
+          </tr>
+          <tr>
+            <td>Penerbit</td>
+            <td style="padding-left: 50px">: <?php echo $data['penerbit'] ?></td>
+          </tr>
+          <tr>
+            <td>Tahun Terbit</td>
+            <td style="padding-left: 50px">: <?php echo $data['tahun'] ?></td>
+          </tr>
+          <tr>
+            <td>Tempat Terbit</td>
+            <td style="padding-left: 50px">: <?php echo $data['tempat'] ?></td>
+          </tr>
+          <!-- <tr>
+            <td></td>
+            <td><input type="submit" name="btnSubmit" value="Ubah Data">&nbsp;&nbsp;<a href="http://localhost/mppl/index.php/ctr/databukupage"><input type="button" value="Cancel"></a></td>
+          </tr> -->
+        </table>
     </div>
 
-    <div  class="w3-section w3-bottombar w3-padding-16" align="center">
-      <a href="<?php echo "http://localhost/mppl/index.php/ctr/databukupage/";?>"><button style="" name="Kembali" type="button" value="Kembali">Kembali</button></a>
+    <div  class="w3-section w3-bottombar w3-topbar w3-padding-16" align="center">
+      <!-- <a href="<?php echo "http://localhost/mppl/index.php/ctr/databukupage/";?>"><button style="" name="Kembali" type="button" value="Kembali">Kembali</button></a> -->
+      <input type="button" value="Kembali" onclick="history.back(-1)" />
     </div>
     <!--end ISI-->
 

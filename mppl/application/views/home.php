@@ -46,7 +46,7 @@
 
   <!-- Navigationbar -->
   <div style="background: #6E6E6E;height: 54px;width: 100%">
-    <a style="font-size: 33px;padding-left: 20px;color: #f7f7f7;"><font face="Times New Roman">Data Peminjaman Buku</font></a>
+    <a style="font-size: 33px;padding-left: 20px;color: #f7f7f7;"><font face="Times New Roman">Data Peminjaman Buku RBTC</font></a>
     <div class="dropdown" style="margin-right: 16px;margin-top: 5px;float: right;">
     <button class="dropbtn">Admin</button>
       <div class="dropdown-content">
@@ -64,32 +64,39 @@
         <input type="text" name="search" placeholder="Search.."><!DOCTYPE html> -->
 
       <div style="padding-top: 20px; padding-bottom: 20px">
-        <i>Cari berdasarkan...</i>
         <form method="get" action="<?php echo "http://localhost/mppl/index.php/ctr/search_peminjaman/"?>">
-          <input type="text" class="textinput" name="cari" placeholder="NRP/Nama/Judul" style="width: 300px"><input type="submit" value="search" class="button">
+          <input type="text" class="textinput" name="cari" placeholder=" Cari berdasarkan..." style="width: 300px"><input type="submit" value="search" class="button">
         </form>
       </div>
 
       <table border="1" style="border-collapse: collapse;width: 100%;">
         <tr style="background: #C9C9C9;">
-          <th width="11%" style="padding-top: 10px;padding-bottom: 10px">NRP</th>
-          <th width="22%" style="padding-top: 10px;padding-bottom: 10px">Nama</th> 
-          <th width="26%">Judul Buku</th>
-          <th width="6%">Edisi</th>
-          <th width="15%">Tgl Peminjaman</th>
-          <th width="20%">Action</th>
+          <th width="" style="padding-top: 10px;padding-bottom: 10px">No.</th>
+          <th width="15%" style="padding-top: 10px;padding-bottom: 10px">Kode Buku</th>
+          <th width="" style="padding-top: 10px;padding-bottom: 10px">Peminjam</th> 
+          <th width="14%">Tanggal Peminjaman</th>
+          <th width="14%">Tenggat Pengembalian</th>
+          <th width="14%">Tanggal Pengembalian</th>
+          <th width="">Action</th>
         </tr>
         <tbody style="background: #FCFCFC;">
-          <?php foreach($data as $row): ?>
+          <?php 
+            $no=1;
+            foreach($data as $row): 
+          ?>
           <tr>   
-              <td style="padding-left: 10px"><?php echo $row['nrp']; ?></td>
+              <td style="text-align: center;"><?php echo $no++; ?></td>
+              <td style="text-align: center;"><?php echo $row['kode']; ?></td>
               <td style="padding-left: 10px"><?php echo $row['nama']; ?></td>
-              <td style="padding-left: 10px"><?php echo $row['judul']; ?></td>
-              <td style="text-align: center;"><?php echo $row['edisi']; ?></td>
-              <td style="text-align: center;"><?php echo $row['tanggal']; ?></td>
+              <td style="text-align: center;"><?php echo $row['peminjaman']; ?></td>
+              <td style="text-align: center;"><?php echo $row['tenggat']; ?></td>
+              <td style="text-align: center;"><?php echo $row['pengembalian']; ?></td>
               <td style="text-align: center;">
-                <a href="<?php echo "http://localhost/mppl/index.php/ctr/dikembalikan/".$row['id_peminjaman'];?>"><button type="button">Dikembalikan</button></a>
-                <a href="<?php echo "http://localhost/mppl/index.php/ctr/delete_data/".$row['id_peminjaman'];?>"><button type="button">Hapus</button></a>
+               <!--  <a href="<?php echo "http://localhost/mppl/index.php/ctr/dikembalikan/".$row['id_peminjaman'];?>"><button type="button">Dikembalikan</button></a> -->
+                
+                <!-- <a href="<?php echo "http://localhost/mppl/index.php/ctr/delete_data/".$row['id'];?>"><button type="button">Hapus</button></a> -->
+
+                <a href="#"><button type="button">Hapus</button></a>
               </td>
           </tr>
           <?php endforeach; ?>
