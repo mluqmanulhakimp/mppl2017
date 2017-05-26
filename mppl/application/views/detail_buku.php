@@ -46,13 +46,13 @@
   <!-- Navigationbar -->
   <div style="background: #6E6E6E;height: 54px;width: 100%">
     <a style="font-size: 33px;padding-left: 20px;color: #f7f7f7;"><font face="Times New Roman"> Detail Buku</font></a>
-    <div class="dropdown" style="margin-right: 16px;margin-top: 5px;float: right;">
+    <!-- <div class="dropdown" style="margin-right: 16px;margin-top: 5px;float: right;">
     <button class="dropbtn"><i style=""></i>Admin</button>
       <div class="dropdown-content">
         <a href="#">Profil</a>
         <a href="#">Keluar</a>
       </div>
-    </div>
+    </div> -->
   </div>
   <!-- Header -->
   <header id="portfolio">

@@ -132,7 +132,7 @@
     <hr>
   </div>
   <div class="w3-bar-block" style="margin-left: 10px">
-    <a href="http://localhost/mppl/" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-th-large fa-fw w3-margin-right"></i>Beranda</a> 
+    <a href="http://localhost/mppl/index.php/admin_ctr/" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-th-large fa-fw w3-margin-right"></i>Beranda</a> 
     <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-user fa-fw w3-margin-right"></i>Data Buku</a>
     <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Keluar</a>
     <hr>
@@ -162,28 +162,14 @@
         <a href="#">Profil</a>
         <a href="#">Keluar</a>
       </div> -->
-      <button class="buttonn" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+      <!-- <button class="buttonn" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button> -->
+      <button class="dropbtn">Admin</button>
+        <div class="dropdown-content">
+          <a href="#">Profil</a>
+          <a href="http://localhost/mppl/index.php/login/logout">Keluar</a>
+        </div>
+        <!-- <button class="buttonn" onclick="'http://localhost/mppl/index.php/login/logout'" style="width:auto;">Logout</button> -->
     </div>
-
-      <div id="id01" class="modal">
-        <form class="modal-content animate" action="/action_page.php">
-          <div class="container">
-            <label><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="username" required>
-
-            <label><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="password" required>
-              
-            <button class="buttonn" type="submit">Login</button>
-            <input type="checkbox" checked="checked"> Remember me
-          </div>
-
-          <div class="container" style="background-color:#f1f1f1">
-            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-            <!-- <span class="psw">Forgot <a href="#">password?</a></span> -->
-          </div>
-        </form>
-      </div>
   </div>
 
   <!-- Header -->

@@ -16,9 +16,9 @@ class Ctr extends CI_Controller {
 		// $this->load->view('form_login');
 	}
 
-	public function home(){
-		$this->load->view('home', array('data' => $data));
-	}
+	// public function home(){
+	// 	$this->load->view('home', array('data' => $data));
+	// }
 
 	public function databukupage(){
         $config['base_url']=base_url()."index.php/ctr/databukupage";
@@ -52,6 +52,40 @@ class Ctr extends CI_Controller {
         $this->load->model('mymodel');
         $data['databuku']=$this->mymodel->getdatabuku($config);
         $this->load->view('data_buku', $data);
+	}
+
+	public function admindatabukupage(){
+        $config['base_url']=base_url()."index.php/ctr/admindatabukupage";
+            $config['total_rows']= $this->db->query("
+            	SELECT item_id, title, item_code
+				FROM stock_take_item")->num_rows();
+            $config['per_page']=10;
+        	$config['num_links'] = 6;
+            $config['uri_segment']=3;
+
+        $config['num_tag_open'] = '&nbsp&nbsp';
+        $config['num_tag_close'] = '&nbsp&nbsp';
+        $config['cur_tag_open'] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+        $config['cur_tag_close'] = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+        // $config['next_tag_open'] = "<li>";
+        // $config['next_tagl_close'] = "</li>";
+        $config['prev_tag_open'] = "&nbsp&nbsp&nbsp";
+        // $config['prev_tagl_close'] = "</li>";
+        // $config['first_tag_open'] = "<li>";
+        // $config['first_tagl_close'] = "&nbsp</li>";
+        $config['last_tag_open'] = "&nbsp&nbsp&nbsp";
+        // $config['last_tagl_close'] = "</li>";
+
+            $config['first_link']='<< first';
+        $config['last_link']='last >>';
+        $config['next_link']='next >';
+        $config['prev_link']='< before';
+            $this->pagination->initialize($config);
+ 
+        // konfigurasi model dan view untuk menampilkan data
+        $this->load->model('mymodel');
+        $data['databuku']=$this->mymodel->getdatabuku($config);
+        $this->load->view('admin_data_buku', $data);
 	}
 
 	public function insert_data_buku(){
@@ -114,25 +148,29 @@ class Ctr extends CI_Controller {
 	}
 
 	public function do_insert_peminjaman(){
-		$judul = $this->input->post('judul');
-		$idbuku = $this->mymodel->cekidbuku($judul);
-		if(is_null($idbuku)){
-			echo "Judul buku tidak ditemukan!";
-		}
-		else{
-			$id_peminjam = $this->input->post('nrp');
-			$edisi = $this->input->post('edisi');
-			$tanggal_peminjaman = $this->input->post('tanggal');
-			$data_insert = array(
-				'id_peminjam' => $id_peminjam,
-				'id_buku_pinjam' => $idbuku,
-				'edisi' => $edisi,
-				'tanggal_peminjaman' => $tanggal_peminjaman
-			);
-			$this->mymodel->insertdata('peminjaman',$data_insert);
-			$this->load->helper('url');
-			redirect('/ctr/index');
-		}
+		$kode = $this->input->post('kode');
+		$id_peminjam = $this->input->post('id_peminjam');
+		$tanggal_peminjaman = $this->input->post('tanggal');
+		$tanggal_peminjaman = date('Y-m-d', strtotime($tanggal_peminjaman));
+		$return = 0;
+		// $idbuku = $this->mymodel->cekidbuku($judul);
+		// if(is_null($idbuku)){
+		// 	echo "Judul buku tidak ditemukan!";
+		// }
+		// else{
+		// $id_peminjam = $this->input->post('nrp');
+		// $edisi = $this->input->post('edisi');
+		$data_insert = array(
+			'item_code' => $kode,
+			'member_id' => $id_peminjam,
+			'loan_date' => $tanggal_peminjaman,
+			'due_date' => $tanggal_peminjaman,
+			'is_return' => $return
+		);
+		$this->mymodel->insertdata('loan',$data_insert);
+		$this->load->helper('url');
+		redirect('/ctr/index');
+	// }
 	}
 
 	public function dikembalikan($id_peminjaman){
@@ -204,10 +242,16 @@ class Ctr extends CI_Controller {
 	}
 
 	public function search_peminjaman(){
-		$cari = $this->input->get('cari');
-		// echo $cari;
-		$search = $this->mymodel->searchpeminjaman($cari);
-		$this->load->view('home', array('data' => $search));
+		// $cari = $this->input->get('cari');
+		// // echo $cari;
+		// $search = $this->mymodel->searchpeminjaman($cari);
+		// $this->load->view('home', array('data' => $search));
+	    $keyword = $this->input->get('cari');
+	    // $this->load->model('searchpeminjaman');
+	    $peminjaman = $this->mymodel->searchpeminjaman($keyword);
+	    // $this->load->view('home',$peminjaman);
+	    $this->load->view('home', array('data' => $peminjaman));
+	    // $this->load->view('result',$student);
 	}
 
 	public function search_buku(){

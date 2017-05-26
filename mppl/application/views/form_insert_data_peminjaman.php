@@ -65,16 +65,12 @@
       <form method="POST" action="http://localhost/mppl/index.php/ctr/do_insert_peminjaman">
         <table>
           <tr>
-            <td>NRP</td>
-            <td><input type="text" name="nrp"></td>
+            <td>Kode Buku</td>
+            <td><input type="text" name="kode"></td>
           </tr>
           <tr>
-            <td>Judul Buku</td>
-            <td><input type="text" name="judul"></td>
-          </tr>
-          <tr>
-            <td>Edisi</td>
-            <td><input type="text" name="edisi"></td>
+            <td>ID Peminjam</td>
+            <td><input type="text" name="id_peminjam"></td>
           </tr>
           <tr>
             <td>Tanggal Peminjaman</td>
@@ -82,7 +78,7 @@
           </tr>
           <tr>
             <td></td>
-            <td><input type="submit" name="btnSubmit" value="Simpan">&nbsp;&nbsp;<a href="http://localhost/mppl/"><input type="button" value="Cancel"></a></td>
+            <td><input type="submit" name="btnSubmit" value="Simpan">&nbsp;&nbsp;<input type="button" value="Cancel" onclick="history.back(-1)" /></td>
           </tr>
         </table>
       </form>
