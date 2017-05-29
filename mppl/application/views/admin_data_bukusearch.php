@@ -132,9 +132,9 @@
     <hr>
   </div>
   <div class="w3-bar-block" style="margin-left: 10px">
-    <a href="http://localhost/mppl/" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-th-large fa-fw w3-margin-right"></i>Beranda</a> 
+    <a href="http://localhost/mppl/index.php/admin_ctr/" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-th-large fa-fw w3-margin-right"></i>Beranda</a> 
     <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-user fa-fw w3-margin-right"></i>Data Buku</a>
-    <a href="http://localhost/mppl/index.php/ctr/grafikpeminjaman" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Grafik Peminjaman</a>
+    <!-- <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Tentang RBTC</a> -->
     <hr>
   </div>
   <div class="w3-panel w3-large" style="margin-left: 10px">
@@ -162,28 +162,14 @@
         <a href="#">Profil</a>
         <a href="#">Keluar</a>
       </div> -->
-      <button class="buttonn" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+      <!-- <button class="buttonn" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button> -->
+      <button class="dropbtn">Admin</button>
+        <div class="dropdown-content">
+          <!-- <a href="#">Profil</a> -->
+          <a href="http://localhost/mppl/index.php/login/logout">Keluar</a>
+        </div>
+        <!-- <button class="buttonn" onclick="'http://localhost/mppl/index.php/login/logout'" style="width:auto;">Logout</button> -->
     </div>
-
-      <div id="id01" class="modal">
-        <form class="modal-content animate" action="/action_page.php">
-          <div class="container">
-            <label><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="username" required>
-
-            <label><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="password" required>
-              
-            <button class="buttonn" type="submit">Login</button>
-            <input type="checkbox" checked="checked"> Remember me
-          </div>
-
-          <div class="container" style="background-color:#f1f1f1">
-            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-            <!-- <span class="psw">Forgot <a href="#">password?</a></span> -->
-          </div>
-        </form>
-      </div>
   </div>
 
   <!-- Header -->
@@ -195,7 +181,7 @@
     <!--ISI-->
       <table border="1" style="border-collapse: collapse;width: 100%;" class='table table-stripped table-bordered'>
       <div style="padding-top: 10px;">
-        <form style="" method="get" action="<?php echo "http://localhost/mppl/index.php/ctr/search_buku/"?>">
+        <form style="" method="get" action="<?php echo "http://localhost/mppl/index.php/admin_ctr/search_buku/"?>">
           <input type="text" class="textinput" name="cari" placeholder=" Cari buku..." style="width: 300px; height: 30px"><input type="submit" value="search" class="button">
         </form>
       </div>
@@ -224,13 +210,13 @@
           <?php
               $num = $this->uri->segment('3') + 1;
               $no=1;
-              foreach ($databuku as $row) {
+              foreach ($data as $row) {
           ?>
           <tr>
               <td align="center"><?php echo $num++; ?></td>
-              <td style="padding: 10px;"><?php echo $row->title; ?></td>
-              <td align="center"><?php echo $row->item_code; ?></td>
-              <td style="padding: 5px"><a href="<?php echo "http://localhost/mppl/index.php/ctr/detailbuku/".$row->item_id;?>"><button type="button">Detail</button></a> 
+              <td style="padding: 10px;"><?php echo $row['title']; ?></td>
+              <td align="center"><?php echo $row['item_code']; ?></td>
+              <td style="padding: 5px"><a href="<?php echo "http://localhost/mppl/index.php/ctr/detailbuku/".$row['item_id'];?>"><button type="button">Detail</button></a> 
               </td>
           </tr>
           <?php } ?>
@@ -240,10 +226,10 @@
 
     <div class="w3-section w3-bottombar w3-padding-16" align="center">
       <!-- <a href="<?php echo "http://localhost/mppl/index.php/ctr/insert_data_buku/";?>"><button style="" name="subject" type="submit" value="HTML">Tambah Data Buku</button></a> -->
-        <h5>Halaman</h5>
+        <!-- <h5>Halaman</h5>
         <h5>
         <?php echo $this->pagination->create_links(); ?>
-        </h5>
+        </h5> -->
     </div>
     <!--end ISI-->
 

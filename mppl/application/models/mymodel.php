@@ -5,12 +5,6 @@ class Mymodel extends CI_Model {
 
 	public function getpeminjaman()
 	{
-	    	// select p.id_peminjaman as id_peminjaman, b.id_buku as idbuku,p.id_peminjam as nrp, m.nama as nama, b.judul as judul, p.edisi as edisi, p.tanggal_peminjaman as tanggal
-	    	// from peminjaman p, mahasiswa m, buku b
-	    	// where p.tanggal_pengembalian IS NULL
-	    	// and p.id_buku_pinjam = b.id_buku
-	    	// and p.id_peminjam = m.nrp
-	    	// order by p.tanggal_peminjaman 
 	    $query =  $this->db->query("
 	    	select l.loan_id as id, l.item_code as kode, m.member_name as nama, l.loan_date as peminjaman, l.due_date as tenggat, l.return_date as pengembalian
 	    	from loan l, member m
@@ -96,27 +90,23 @@ class Mymodel extends CI_Model {
 	}
 
 	public function searchpeminjaman($keyword){
-	    	// select p.id_peminjaman as id_peminjaman, b.id_buku as idbuku,p.id_peminjam as nrp, m.nama as nama, b.judul as judul, p.edisi as edisi, p.tanggal_peminjaman as tanggal
-	    	// from peminjaman p, mahasiswa m, buku b
-	    	// where (p.tanggal_pengembalian IS NULL
-	    	// 	   	and p.id_buku_pinjam = b.id_buku
-	    	// 	   	and p.id_peminjam = m.nrp)
-	    	// 	   and
-	    	// 	   (b.id_buku like "$cari"
-	    	// 	    or p.id_peminjam like "$cari"
-	    	// 	    or m.nama like "$cari")
-	    	// order by p.tanggal_peminjaman
 		$query =  $this->db->query("
-			select l.loan_id as id, l.item_code as kode, m.member_name as nama, l.loan_date as peminjaman, l.due_date as tenggat, l.return_date as pengembalian
-	    	from loan l, member m
-	    	where l.member_id = m.member_id
-	    	and m.member_name = '$keyword'
+			SELECT l.loan_id AS id, l.item_code AS kode, m.member_name AS nama, l.loan_date AS peminjaman, l.due_date AS tenggat, l.return_date AS pengembalian
+	    	FROM loan l, member m
+	    	WHERE l.member_id = m.member_id
+	    	AND m.member_name LIKE '%".$keyword."%'
+	    	ORDER BY peminjaman DESC
 	    ");
-		return $query->result();
-	    // $query = $this->db->loan('data',$keyword)->row();
-	    // return $query;
+		return $query->result_array();
 	}
 
-	function search($keyword){
+	public function searchbuku($cari){
+		$query =  $this->db->query("
+			SELECT *
+			FROM stock_take_item
+			WHERE title LIKE '%".$cari."%'
+			
+	    ");
+		return $query->result_array();
 	}
 }

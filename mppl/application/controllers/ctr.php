@@ -11,7 +11,7 @@ class Ctr extends CI_Controller {
     }
 
 	public function index(){
-	    $data = $this->mymodel->getpeminjaman();   
+	    $data = $this->mymodel->getpeminjaman();
 		$this->load->view('home', array('data' => $data));
 		// $this->load->view('form_login');
 	}
@@ -119,145 +119,27 @@ class Ctr extends CI_Controller {
 		$this->load->view('detail_buku', array('data' => $data));
 	}
 
-	public function do_insert_buku(){
-		$kategori = $this->mymodel->cekkategori($this->input->post('kategori'));
-		$data_insert = array(
-			'judul' => $this->input->post('judul'),
-			'edisi' => $this->input->post('edisi'),
-			'pengarang' => $this->input->post('pengarang'),
-			'kategori' => $kategori,
-		);
-		if(($this->input->post('judul')) == '0'){
-			$this->load->helper('url');
-			redirect('/ctr/databukupage');
-		}
-		else{
-			$cek = $this->mymodel->insertdata('buku',$data_insert);
-			$this->load->helper('url');
-			redirect('/ctr/databukupage');
-		}
-	}
-
-
-
-
-
-
-	public function insert_data_peminjaman(){
-		$this->load->view('form_insert_data_peminjaman');
-	}
-
-	public function do_insert_peminjaman(){
-		$kode = $this->input->post('kode');
-		$id_peminjam = $this->input->post('id_peminjam');
-		$tanggal_peminjaman = $this->input->post('tanggal');
-		$tanggal_peminjaman = date('Y-m-d', strtotime($tanggal_peminjaman));
-		$return = 0;
-		// $idbuku = $this->mymodel->cekidbuku($judul);
-		// if(is_null($idbuku)){
-		// 	echo "Judul buku tidak ditemukan!";
-		// }
-		// else{
-		// $id_peminjam = $this->input->post('nrp');
-		// $edisi = $this->input->post('edisi');
-		$data_insert = array(
-			'item_code' => $kode,
-			'member_id' => $id_peminjam,
-			'loan_date' => $tanggal_peminjaman,
-			'due_date' => $tanggal_peminjaman,
-			'is_return' => $return
-		);
-		$this->mymodel->insertdata('loan',$data_insert);
-		$this->load->helper('url');
-		redirect('/ctr/index');
-	// }
-	}
-
-	public function dikembalikan($id_peminjaman){
-		$data = array('tanggal_pengembalian' => date("Y-m-d"));
-		$cek = $this->mymodel->konfirmasipengembalian($data,$id_peminjaman);
-		if($cek>=1){
-			$this->load->helper('url');
-			redirect('/ctr/index');
-		}
-	}
-
-	public function delete_data($id_peminjaman){
-		$where = array(
-			'loan_id' => $id_peminjaman
-		);
-		$cek = $this->mymodel->deletedata('loan',$where);
-		if($cek>=1){
-			$this->load->helper('url');
-			redirect('/ctr/index');
-		}
-	}
-
-	public function delete_data_buku($id){
-		$where = array(
-			'id_buku' => $id
-		);
-		$cek = $this->mymodel->deletedata('buku',$where);
-		if($cek>=1){
-			$this->load->helper('url');
-			redirect('/ctr/databukupage');
-		}
-	}
-
-	public function edit_data_buku($idbuku){
-		$buku = $this->mymodel->getdatabuku("
-	    	select b.id_buku as id_buku, b.judul as judul, b.edisi as edisi, b.pengarang as pengarang, k.nama_kategori as kategori from buku b, kategori k where id_buku = '$idbuku' and b.kategori = k.id_kategori
-	    ");
-	    $data = array(
-	    	"idbuku" => $buku[0]['id_buku'],
-	    	"judul" => $buku[0]['judul'],
-	    	"edisi" => $buku[0]['edisi'],
-	    	"pengarang" => $buku[0]['pengarang'],
-	    	"kategori" => $buku[0]['kategori'],
-	    );
-		$this->load->view('form_edit_data_buku', array('data' => $data));
-	}
-
-	public function do_edit_data_buku($idbuku){
-		$namakategori = $this->input->post('kategori');
-		$kategori = $this->mymodel->cekkategori($namakategori);
-		// echo $kategori;
-		if(is_null($kategori)){
-			echo "Kategori yang anda cari tidak ditemukan!";
-		}
-		else{
-			$judul = $this->input->post('judul');
-			$edisi = $this->input->post('edisi');
-			$pengarang = $this->input->post('pengarang');
-			$data_insert = array(
-				'judul' => $judul,
-				'edisi' => $edisi,
-				'pengarang' => $pengarang,
-				'kategori' => $kategori
-			);
-			$this->mymodel->editdata('buku', $data_insert, $idbuku);
-			$this->load->helper('url');
-			redirect('/ctr/databukupage');
-		}
-	}
-
 	public function search_peminjaman(){
-		// $cari = $this->input->get('cari');
-		// // echo $cari;
-		// $search = $this->mymodel->searchpeminjaman($cari);
-		// $this->load->view('home', array('data' => $search));
 	    $keyword = $this->input->get('cari');
-	    // $this->load->model('searchpeminjaman');
-	    $peminjaman = $this->mymodel->searchpeminjaman($keyword);
-	    // $this->load->view('home',$peminjaman);
-	    $this->load->view('home', array('data' => $peminjaman));
-	    // $this->load->view('result',$student);
+	    $data = $this->mymodel->searchpeminjaman($keyword);
+	    $this->load->view('homesearch', array('data' => $data));
 	}
 
 	public function search_buku(){
 		$cari = $this->input->get('cari');
 		// echo $cari;
-		$search = $this->mymodel->searchpeminjaman($cari);
-		$this->load->view('home', array('data' => $search));
+		$search = $this->mymodel->searchbuku($cari);
+		$this->load->view('data_bukusearch', array('data' => $search));
+	}
+
+	public function grafikpeminjaman(){
+		$data = $this->mymodel->getdetailbuku("
+	    	select kode, judul, count(judul) AS total
+			from (select a.item_code as kode, b.title as judul FROM loan a, stock_take_item b WHERE a.item_code=b.item_code) as peminjaman
+			group by judul
+			order by total desc
+			limit 0,15
+	    ");
+		$this->load->view('grafik_peminjaman', array('data' => $data));
 	}
 }

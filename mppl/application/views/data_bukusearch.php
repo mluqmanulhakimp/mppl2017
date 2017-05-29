@@ -222,15 +222,15 @@
           <?php endforeach; ?> -->
 
           <?php
-              $num = $this->uri->segment('3') + 1;
+              // $num = $this->uri->segment('3') + 1;
               $no=1;
-              foreach ($databuku as $row) {
+              foreach ($data as $row) {
           ?>
           <tr>
-              <td align="center"><?php echo $num++; ?></td>
-              <td style="padding: 10px;"><?php echo $row->title; ?></td>
-              <td align="center"><?php echo $row->item_code; ?></td>
-              <td style="padding: 5px"><a href="<?php echo "http://localhost/mppl/index.php/ctr/detailbuku/".$row->item_id;?>"><button type="button">Detail</button></a> 
+              <td align="center"><?php echo $no++; ?></td>
+              <td style="padding: 10px;"><?php echo $row['title']; ?></td>
+              <td align="center"><?php echo $row['item_code']; ?></td>
+              <td style="padding: 5px"><a href="<?php echo "http://localhost/mppl/index.php/ctr/detailbuku/".$row['item_id'];?>"><button type="button">Detail</button></a> 
               </td>
           </tr>
           <?php } ?>
@@ -240,10 +240,10 @@
 
     <div class="w3-section w3-bottombar w3-padding-16" align="center">
       <!-- <a href="<?php echo "http://localhost/mppl/index.php/ctr/insert_data_buku/";?>"><button style="" name="subject" type="submit" value="HTML">Tambah Data Buku</button></a> -->
-        <h5>Halaman</h5>
+        <!-- <h5>Halaman</h5>
         <h5>
         <?php echo $this->pagination->create_links(); ?>
-        </h5>
+        </h5> -->
     </div>
     <!--end ISI-->
 
