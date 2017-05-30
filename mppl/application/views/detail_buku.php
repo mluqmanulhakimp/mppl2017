@@ -24,6 +24,8 @@
   <div class="w3-bar-block" style="margin-left: 10px">
     <a href="http://localhost/mppl/" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-th-large fa-fw w3-margin-right"></i>Beranda</a> 
     <a href="http://localhost/mppl/index.php/ctr/databukupage" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-user fa-fw w3-margin-right"></i>Data Buku</a>
+    <a href="http://localhost/mppl/index.php/ctr/grafikpeminjaman" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Grafik Peminjaman</a>
+    <a href="http://localhost/mppl/index.php/ctr/usermanual" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>User Manual</a>
     <!-- <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Tentang RBTC</a> -->
     <hr>
   </div>

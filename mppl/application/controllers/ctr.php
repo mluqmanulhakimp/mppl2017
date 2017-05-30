@@ -142,4 +142,8 @@ class Ctr extends CI_Controller {
 	    ");
 		$this->load->view('grafik_peminjaman', array('data' => $data));
 	}
+
+	public function usermanual(){
+		$this->load->view('user_manual');
+	}
 }

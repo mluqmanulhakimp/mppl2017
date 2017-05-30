@@ -132,10 +132,10 @@
     <hr>
   </div>
   <div class="w3-bar-block" style="margin-left: 10px">
-    <a href="#"w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>Beranda</a> 
+    <a href="http://localhost/mppl/"w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-th-large fa-fw w3-margin-right"></i>Beranda</a> 
     <a href="http://localhost/mppl/index.php/ctr/databukupage" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>Data Buku</a>
     <a href="http://localhost/mppl/index.php/ctr/grafikpeminjaman" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Grafik Peminjaman</a>
-     <a href="http://localhost/mppl/index.php/ctr/usermanual" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>User Manual</a>
+     <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-user fa-fw w3-margin-right"></i>User Manual</a>
     <hr>
   </div>
   <div class="w3-panel w3-large" style="margin-left: 10px">
@@ -197,50 +197,21 @@
    <!--    <div style="padding-top: 20px; padding-bottom: 20px">
         <input type="text" name="search" placeholder="Search.."><!DOCTYPE html> -->
 
-      <div style="padding-top: 10px;padding-bottom: 10px">
-        <!-- <a href="<?php echo "http://localhost/mppl/index.php/ctr/insert_data_peminjaman/";?>"><button style="" name="subject" type="submit" value="HTML">Tambah Data Peminjaman</button></a> -->
-        <form style="" method="get" action="<?php echo "http://localhost/mppl/index.php/ctr/search_peminjaman/"?>">
-          <input type="text" class="textinput" name="cari" placeholder=" Cari nama peminjam..." style="width: 300px; height: 30px"><input type="submit" value="search" class="button">
-        </form>
-        <!-- <form action = "" method = "get">
-            <input type = "text" name = "searchkey" class = "box" placeholder="Search by name"/>
-            <input type = "submit" value = ""/>
-          </form> -->
-      </div>
+      <!-- isi -->
+      <center>User Manual<br>
+      Sistem Informasi Peminjaman Buku atau Pustaka di RBTC
+      </center>
 
-      <table border="1" style="border-collapse: collapse;width: 100%;">
-        <tr style="background: #C9C9C9;">
-          <th width="5%" style="padding-top: 10px;padding-bottom: 10px">No.</th>
-          <th width="17%" style="padding-top: 10px;padding-bottom: 10px">Kode Buku</th>
-          <th width="34%" style="padding-top: 10px;padding-bottom: 10px">Peminjam</th> 
-          <th width="14%">Tanggal Peminjaman</th>
-          <th width="14%">Tenggat Pengembalian</th>
-          <th width="14%">Tanggal Pengembalian</th>
-          <!-- <th width="16%">Action</th> -->
-        </tr>
-        <tbody style="background: #FCFCFC;">
-          <?php 
-            $no=1;
-            foreach($data as $row): 
-          ?>
-          <tr>   
-              <td style="text-align: center;"><?php echo $no++; ?></td>
-              <td style="text-align: center;"><?php echo $row['kode']; ?></td>
-              <td style="padding-left: 10px"><?php echo $row['nama']; ?></td>
-              <td style="text-align: center;"><?php echo $row['peminjaman']; ?></td>
-              <td style="text-align: center;"><?php echo $row['tenggat']; ?></td>
-              <td style="text-align: center;"><?php echo $row['pengembalian']; ?></td>
-              <!-- <td style="text-align: center;"> -->
-                
-                <!-- <a href="<?php echo "http://localhost/mppl/index.php/ctr/delete_data/".$row['id'];?>"><button type="button">Hapus</button></a> -->
+      Menu utama terdapat pada bagian kiri halaman, terdiri dari :<br>
+      1. Beranda<br>
+      2. Data Buku<br>
+      3. Grafik Peminjaman<br>
+<strong>Daftar fungsi dan cara penggunaan :</strong><br>      
+Lihat daftar buku: <br>
+- Klik link "Data Buku" pada menu di bagian kiri
 
-               <!-- <a href="<?php echo "http://localhost/mppl/index.php/ctr/dikembalikan/".$row['id_peminjaman'];?>"><button type="button">Dikembalikan</button></a> -->
-                <!-- <a href="#"><button type="button">Hapus</button></a> -->
-              <!-- </td> -->
-          </tr>
-          <?php endforeach; ?>
-        </tbody>
-      </table>
+
+      <!-- end isi -->
 
       <div  class="w3-section w3-bottombar w3-padding-16" align="center">
       </div>
