@@ -209,6 +209,12 @@
 <strong>Daftar fungsi dan cara penggunaan :</strong><br>      
 Lihat daftar buku: <br>
 - Klik link "Data Buku" pada menu di bagian kiri
+       
+       <strong>Lihat detail buku</strong> <br>- Pada halaman "Data Buku", klik tombol "detail" pada buku yang diinginkan<br><br><strong>Lihat data peminjaman buku</strong><br>- Klik "Beranda" pada menu<br><br><strong>Lihat grafik peminjaman buku</strong><br>- Klik "Grafik Peminjaman" pada menu<br><br><strong>Tambah, hapus dan mengubah data peminjaman buku:</strong><br>- Untuk mengakses fungsi ini, perlu login sebagai admin terlebih dahulu dengan cara :<br>- Klik tombol login di sebelah pojok kanan atas<br>- Masukkan Username dan Password<br>- Klik tombol "Login"<br><br>
+<strong>- Fungsi - fungsi di bawah ini dapat diakses melalui halaman "Beranda"</strong> <br><br>
+<strong> Tambah data peminjaman </strong><br>- Klik tombol "Tambah Data Peminjaman"<br>- Isikan data id buku, id peminjam dan tanggal peminjaman, lalu simpan<br>
+<br><strong> Hapus data peminjaman </strong> <br>- Lihat pada tabel tab "Action" dan klik tombol "Hapus" <br><br>
+<strong> Ubah / update status peminjaman </strong> <br>- Lihat pada tabel tab "Action" dan klik tombol Dikembalikan <br>
 
 
       <!-- end isi -->
