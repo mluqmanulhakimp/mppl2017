@@ -7,6 +7,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="http://localhost/mppl/style.css">
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
 
 <style>
   /* Full-width input fields */
@@ -132,10 +135,10 @@
     <hr>
   </div>
   <div class="w3-bar-block" style="margin-left: 10px">
-    <a href="http://localhost/mppl/"w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-th-large fa-fw w3-margin-right"></i>Beranda</a> 
+    <a href="http://localhost/mppl/" w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>Beranda</a> 
     <a href="http://localhost/mppl/index.php/ctr/databukupage" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-book fa-fw w3-margin-right"></i>Data Buku</a>
     <a href="http://localhost/mppl/index.php/ctr/grafikpeminjaman" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bar-chart fa-fw w3-margin-right"></i>Data Peminjaman</a>
-     <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-user fa-fw w3-margin-right"></i>User Manual</a>
+     <a href="http://localhost/mppl/index.php/ctr/usermanual" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>User Manual</a>
     <hr>
   </div>
   <div class="w3-panel w3-large" style="margin-left: 10px">
@@ -153,22 +156,15 @@
 <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-  <div class="w3-main" style="margin-left:250px">
+<div class="w3-main" style="margin-left:250px">
 
   <!-- Navigationbar -->
   <div style="background: #6E6E6E;height: 54px;width: 100%">
-    <a style="font-size: 33px;padding-left: 20px;color: #f7f7f7;"><font face="Times New Roman">User Manual</font></a>
+    <a style="font-size: 33px;padding-left: 20px;color: #f7f7f7;"><font face="Times New Roman">Koleksi Buku Terbaru RBTC</font></a>
     <div style="margin-right: 16px;margin-top: 5px;float: right;">
-    <!-- <button class="dropbtn">Admin</button>
-      <div class="dropdown-content">
-        <a href="#">Profil</a>
-        <a href="#">Keluar</a>
-      </div> -->
       <button class="buttonn" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
     </div>
-
       <div id="id01" class="modal">
-        
         <form class="modal-content animate" action="http://localhost/mppl/index.php/login/aksi_login">
           <div class="container">
             <label><b>Username</b></label>
@@ -189,48 +185,58 @@
       </div>
 
   </div>
+
   <!-- Header -->
+
   <header id="portfolio">
     <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
     <div class="w3-container">
-    <img src="http://localhost/mppl/img/libr.jpg" style="height: 200px; width: 975px;margin-top: 17px;">
+    <img src="http://localhost/mppl/img/libr.jpg" style="height: 200px; width: 100%;margin-top: 17px;">
    <!--    <div style="padding-top: 20px; padding-bottom: 20px">
         <input type="text" name="search" placeholder="Search.."><!DOCTYPE html> -->
-
-      <!-- isi -->
-      <!-- <br><br><strong><center>User Manual<br>
-      Sistem Informasi Peminjaman Buku atau Pustaka di RBTC
-      </center></strong> -->
-      <br><br>
-
-      <strong>Menu utama terdapat pada bagian kiri halaman, terdiri dari :<br></strong>
-      1. Beranda<br>
-      2. Data Buku<br>
-      3. Data Peminjaman<br><br>
-<strong>Daftar fungsi dan cara penggunaan :</strong><br><br>
-    <strong>1. Lihat daftar buku: </strong><br>
-    - Klik link menu "Data Buku" pada menu di bagian kiri<br><br>
-
-    <strong>2. Lihat detail buku</strong> <br>- Pada halaman "Data Buku", klik tombol "detail" pada buku yang diinginkan<br><br>
-
-    <strong>3. Lihat data peminjaman buku</strong><br>- Klik menu "Data Peminjaman" pada menu<br><br>
-    <strong>4. Lihat grafik peminjaman buku terbanyak</strong><br>- Klik menu "Beranda" pada menu bagian kiri<br><br>
-    <strong>5. Lihat koleksi buku RBTC terbaru</strong><br>- Klik link "Lihat Daftar Koleksi Buku Terbaru RBTC" pada halaman "Beranda"<br><br>
-    <strong>Tambah, hapus dan mengubah data peminjaman buku:</strong><br>- Untuk mengakses fungsi ini, perlu login sebagai admin terlebih dahulu dengan cara :<br>- Klik tombol login di sebelah pojok kanan atas<br>- Masukkan Username dan Password<br>- Klik tombol "Login"<br><br>
-<strong>- Fungsi - fungsi di bawah ini dapat diakses melalui halaman "Beranda"</strong> <br><br>
-<strong> Tambah data peminjaman </strong><br>- Klik tombol "Tambah Data Peminjaman"<br>- Isikan data id buku, id peminjam dan tanggal peminjaman, lalu simpan<br>
-<br><strong> Hapus data peminjaman </strong> <br>- Lihat pada tabel tab "Action" dan klik tombol "Hapus" <br><br>
-<strong> Ubah / update status peminjaman </strong> <br>- Lihat pada tabel tab "Action" dan klik tombol Dikembalikan <br>
-      <!-- end isi -->
-
-      <div  class="w3-section w3-bottombar w3-padding-16" align="center">
+        <table border="1" style="border-collapse: collapse;width: 100%;" class='table table-stripped table-bordered'>
+      <div style="padding-top: 10px;">
+        <form style="" method="get" action="<?php echo "http://localhost/mppl/index.php/ctr/search_buku/"?>">
+          <input type="text" class="textinput" name="cari" placeholder=" Cari buku..." style="width: 300px; height: 30px"><input type="submit" value="search" class="button">
+        </form>
       </div>
+      <h3 style="text-align: center;"></h3>
+        <tr style="background: #C9C9C9;">
+          <th width="4%" style="padding-top: 10px;padding-bottom: 10px">No.</th>
+          <th width="" style="padding-top: 10px;padding-bottom: 10px">Judul Buku</th> 
+          <!-- <th width="16%" style="padding-top: 10px;padding-bottom: 10px">Kode Buku</th> -->
+          <!-- <th width="">Tahun Terbit</th> -->
+          <!-- <th width="">Kategori</th> -->
+          <th width="">Detail</th>
+        </tr>
+        <tbody style="background: #FCFCFC;">
+          <?php
+              $no=1;
+              foreach ($data as $row) {
+          ?>
+          <tr>
+              <td align="center"><?php echo $no++; ?></td>
+              <td style="padding: 10px;"><?php echo $row['judul']; ?></td>
+              <!-- <td align="center"><?php echo $row['terbit']; ?></td> -->
+              <!-- <td align="center"><?php echo $row['kategori']; ?></td> -->
+              <td style="padding: 5px"><a href="<?php echo "http://localhost/mppl/index.php/ctr/detailbuku/".$row['id'];?>"><button type="button" style="cursor: pointer;">Detail</button></a> 
+              </td>
+          </tr>
+          <?php } ?>
+
+        </tbody>
+      </table>
 
     </div>
   </header>
+    <div  class="w3-section w3-bottombar w3-topbar w3-padding-16" align="center">
+      <input type="button" value="Kembali" onclick="history.back(-1)" />
+    </div>
 
   <!-- Footer -->
+          <div style="position: relative;">
   <?php include 'footer.php' ?>
+          </div>
 
 <!-- End page content -->
 </div>
@@ -247,6 +253,7 @@
       }
   }
 </script>
+
 
 </body>
 </html>

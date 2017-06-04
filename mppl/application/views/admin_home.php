@@ -23,7 +23,7 @@
   </div>
   <div class="w3-bar-block" style="margin-left: 10px">
     <a href="#" w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>Beranda</a> 
-    <a href="http://localhost/mppl/index.php/ctr/admindatabukupage" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>Data Buku</a>
+    <a href="http://localhost/mppl/index.php/ctr/admindatabukupage" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-book fa-fw w3-margin-right"></i>Data Buku</a>
     <!-- <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Tentang RBTC</a> -->
     <hr>
   </div>
@@ -61,12 +61,13 @@
   <header id="portfolio">
     <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
     <div class="w3-container">
-    <img src="http://localhost/mppl/img/lib.jpg" style="height: 200px; width: 975px;margin-top: 17px;">
+    <img src="http://localhost/mppl/img/libr.jpg" style="height: 200px; width: 975px;margin-top: 17px;">
    <!--    <div style="padding-top: 20px; padding-bottom: 20px">
         <input type="text" name="search" placeholder="Search.."><!DOCTYPE html> -->
 
       <div style="padding-top: 10px;padding-bottom: 10px">
-        <a style="margin-left: 400px" href="<?php echo "http://localhost/mppl/index.php/admin_ctr/insert_data_peminjaman/";?>"><button style="" name="subject" type="submit" value="HTML">Tambah Data Peminjaman</button></a>
+        <a style="margin-left: 423px;" href="<?php echo "http://localhost/mppl/index.php/admin_ctr/insert_data_peminjaman/";?>"><button style="cursor: pointer;" name="subject" type="submit" value="HTML">Tambah Data Peminjaman</button></a>
+        <div style="margin-top: -28px"><a style="margin-left: 685px;" href="<?php echo "http://localhost/mppl/index.php/admin_ctr/bukubelumkembali/";?>"><button style="cursor: pointer;" name="subject" type="submit" value="HTML">Data Buku Yang Belum Dikembalikan</button></a></div>
         <form style="margin-top: -37px;padding-top: 8px" method="get" action="<?php echo "http://localhost/mppl/index.php/admin_ctr/search_peminjaman/"?>">
           <input type="text" class="textinput" name="cari" placeholder=" Cari nama peminjam..." style="width: 300px; height: 30px"><input type="submit" value="search" class="button">
         </form>

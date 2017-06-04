@@ -6,9 +6,10 @@ class Mymodel extends CI_Model {
 	public function getpeminjaman()
 	{
 	    $query =  $this->db->query("
-	    	select l.loan_id as id, l.item_code as kode, m.member_name as nama, l.loan_date as peminjaman, l.due_date as tenggat, l.return_date as pengembalian
-	    	from loan l, member m
+	    	select l.loan_id as id, l.item_code as kode, s.item_id as id, m.member_name as nama, l.loan_date as peminjaman, l.due_date as tenggat, l.return_date as pengembalian
+	    	from loan l, member m, stock_take_item s
 	    	where l.member_id = m.member_id
+	    	and s.item_code = l.item_code
 	    	order by peminjaman desc
 	    	limit 0,100
 	    ");
@@ -91,9 +92,10 @@ class Mymodel extends CI_Model {
 
 	public function searchpeminjaman($keyword){
 		$query =  $this->db->query("
-			SELECT l.loan_id AS id, l.item_code AS kode, m.member_name AS nama, l.loan_date AS peminjaman, l.due_date AS tenggat, l.return_date AS pengembalian
-	    	FROM loan l, member m
+			SELECT l.loan_id AS id, l.item_code AS kode, s.item_id as id, m.member_name AS nama, l.loan_date AS peminjaman, l.due_date AS tenggat, l.return_date AS pengembalian
+	    	FROM loan l, member m, stock_take_item s
 	    	WHERE l.member_id = m.member_id
+	    	and s.item_code = l.item_code
 	    	AND m.member_name LIKE '%".$keyword."%'
 	    	ORDER BY peminjaman DESC
 	    ");

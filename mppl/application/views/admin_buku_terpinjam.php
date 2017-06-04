@@ -22,7 +22,7 @@
     <hr>
   </div>
   <div class="w3-bar-block" style="margin-left: 10px">
-    <a href="#" w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>Beranda</a> 
+    <a href="http://localhost/mppl/index.php/admin_ctr/" w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>Beranda</a> 
     <a href="http://localhost/mppl/index.php/ctr/admindatabukupage" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-book fa-fw w3-margin-right"></i>Data Buku</a>
     <!-- <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Tentang RBTC</a> -->
     <hr>
@@ -46,7 +46,7 @@
 
   <!-- Navigationbar -->
   <div class="dropdown" style="background: #6E6E6E;height: 54px;width: 100%">
-    <a style="font-size: 33px;padding-left: 20px;color: #f7f7f7;"><font face="Times New Roman">Data Peminjaman Buku RBTC</font></a>
+    <a style="font-size: 33px;padding-left: 20px;color: #f7f7f7;"><font face="Times New Roman">Data Buku Yang Belum Dikembalikan</font></a>
     <div style="margin-right: 16px;margin-top: 5px;float: right;">
     <button class="dropbtn">Admin</button>
       <div class="dropdown-content">
@@ -66,25 +66,17 @@
         <input type="text" name="search" placeholder="Search.."><!DOCTYPE html> -->
 
       <div style="padding-top: 10px;padding-bottom: 10px">
-        <a style="margin-left: 400px" href="<?php echo "http://localhost/mppl/index.php/admin_ctr/insert_data_peminjaman/";?>"><button style="" name="subject" type="submit" value="HTML">Tambah Data Peminjaman</button></a>
-        <form style="margin-top: -37px;padding-top: 8px" method="get" action="<?php echo "http://localhost/mppl/index.php/admin_ctr/search_peminjaman/"?>">
-          <input type="text" class="textinput" name="cari" placeholder=" Cari nama peminjam..." style="width: 300px; height: 30px"><input type="submit" value="search" class="button">
-        </form>
-        <!-- <form action = "" method = "get">
-            <input type = "text" name = "searchkey" class = "box" placeholder="Search by name"/>
-            <input type = "submit" value = ""/>
-          </form> -->
       </div>
 
       <table border="1" style="border-collapse: collapse;width: 100%;">
         <tr style="background: #C9C9C9;">
           <th width="5%" style="padding-top: 10px;padding-bottom: 10px">No.</th>
-          <th width="14%" style="padding-top: 10px;padding-bottom: 10px">Kode Buku</th>
-          <th width="30%" style="padding-top: 10px;padding-bottom: 10px">Peminjam</th> 
+          <th width="" style="padding-top: 10px;padding-bottom: 10px">Kode Buku</th>
+          <th width="" style="padding-top: 10px;padding-bottom: 10px">Peminjam</th> 
           <!-- <th width="10%">Tanggal Peminjaman</th> -->
-          <th width="10%">Tenggat Pengembalian</th>
-          <th width="10%">Tanggal Pengembalian</th>
-          <th width="18%">Action</th>
+          <!-- <th width="">Tenggat Pengembalian</th> -->
+          <th width="">Tenggat Peminjaman</th>
+          <th width="">Keterlambatan</th>
         </tr>
         <tbody style="background: #FCFCFC;">
           <?php 
@@ -93,18 +85,20 @@
           ?>
           <tr>   
               <td style="text-align: center;"><?php echo $no++; ?></td>
-              <td style="height: 50px; text-align: center;"><?php echo $row['kode']; ?></td>
-              <td style="padding-left: 10px"><?php echo $row['nama']; ?></td>
+              <td style="height: 50px; text-align: center;"><a href="<?php echo "http://localhost/mppl/index.php/ctr/detailbuku/".$row['id'];?>"><?php echo $row['kode']; ?></a></td>
+              <td style="padding-left: 10px"><?php echo $row['peminjam']; ?></td>
  <!--              <td style="text-align: center;"><?php echo $row['peminjaman']; ?></td> -->
+              <!-- <td style="text-align: center;"><?php echo $row['tenggat']; ?></td> -->
               <td style="text-align: center;"><?php echo $row['tenggat']; ?></td>
-              <td style="text-align: center;"><?php echo $row['pengembalian']; ?></td>
-              <td style="text-align: center;">
-                
-
-                <a href="<?php echo "http://localhost/mppl/index.php/admin_ctr/dikembalikan/".$row['id'];?>"><button type="button">Dikembalikan</button></a>
-                <a href="<?php echo "http://localhost/mppl/index.php/admin_ctr/delete_data/".$row['id'];?>"><button type="button">Hapus</button></a>
-                <!-- <a href="#"><button type="button">Hapus</button></a> -->
-              </td>
+              <?php 
+              // $skrg = date("Y-m-d");
+              $skrg = new DateTime(date("Y-m-d"));
+              $tenggat = new DateTime($row['tenggat']);
+              // $telat = date('d', strtotime('-$tenggat', strtotime($skrg)));
+              $telat = $skrg->diff($tenggat);
+              // $telat = date_diff($tenggat, $skrg);
+              ?>
+              <td style="text-align: center;"><?php echo $telat->format('%d hari'); ?></td>
           </tr>
           <?php endforeach; ?>
         </tbody>

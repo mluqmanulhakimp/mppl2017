@@ -132,10 +132,10 @@
     <hr>
   </div>
   <div class="w3-bar-block" style="margin-left: 10px">
-    <a href="http://localhost/mppl/"w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-th-large fa-fw w3-margin-right"></i>Beranda</a> 
+    <a href="http://localhost/mppl/" w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-th-large fa-fw w3-margin-right"></i>Beranda</a> 
     <a href="http://localhost/mppl/index.php/ctr/databukupage" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-book fa-fw w3-margin-right"></i>Data Buku</a>
-    <a href="http://localhost/mppl/index.php/ctr/grafikpeminjaman" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bar-chart fa-fw w3-margin-right"></i>Data Peminjaman</a>
-     <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-user fa-fw w3-margin-right"></i>User Manual</a>
+    <a href="http://localhost/mppl/index.php/ctr/grafikpeminjaman" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bar-chart fa-fw w3-margin-right w3-text-teal"></i>Data Peminjaman</a>
+    <a href="http://localhost/mppl/index.php/ctr/usermanual" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>User Manual</a>
     <hr>
   </div>
   <div class="w3-panel w3-large" style="margin-left: 10px">
@@ -157,7 +157,7 @@
 
   <!-- Navigationbar -->
   <div style="background: #6E6E6E;height: 54px;width: 100%">
-    <a style="font-size: 33px;padding-left: 20px;color: #f7f7f7;"><font face="Times New Roman">User Manual</font></a>
+    <a style="font-size: 33px;padding-left: 20px;color: #f7f7f7;"><font face="Times New Roman">Data Peminjaman Buku RBTC</font></a>
     <div style="margin-right: 16px;margin-top: 5px;float: right;">
     <!-- <button class="dropbtn">Admin</button>
       <div class="dropdown-content">
@@ -197,31 +197,38 @@
    <!--    <div style="padding-top: 20px; padding-bottom: 20px">
         <input type="text" name="search" placeholder="Search.."><!DOCTYPE html> -->
 
-      <!-- isi -->
-      <!-- <br><br><strong><center>User Manual<br>
-      Sistem Informasi Peminjaman Buku atau Pustaka di RBTC
-      </center></strong> -->
-      <br><br>
+     <div style="padding-top: 10px;padding-bottom: 10px">
+        <form style="" method="get" action="<?php echo "http://localhost/mppl/index.php/ctr/search_peminjaman/"?>">
+          <input type="text" class="textinput" name="cari" placeholder=" Cari nama peminjam..." style="width: 300px; height: 30px"><input type="submit" value="search" class="button">
+        </form>
+      </div>
 
-      <strong>Menu utama terdapat pada bagian kiri halaman, terdiri dari :<br></strong>
-      1. Beranda<br>
-      2. Data Buku<br>
-      3. Data Peminjaman<br><br>
-<strong>Daftar fungsi dan cara penggunaan :</strong><br><br>
-    <strong>1. Lihat daftar buku: </strong><br>
-    - Klik link menu "Data Buku" pada menu di bagian kiri<br><br>
-
-    <strong>2. Lihat detail buku</strong> <br>- Pada halaman "Data Buku", klik tombol "detail" pada buku yang diinginkan<br><br>
-
-    <strong>3. Lihat data peminjaman buku</strong><br>- Klik menu "Data Peminjaman" pada menu<br><br>
-    <strong>4. Lihat grafik peminjaman buku terbanyak</strong><br>- Klik menu "Beranda" pada menu bagian kiri<br><br>
-    <strong>5. Lihat koleksi buku RBTC terbaru</strong><br>- Klik link "Lihat Daftar Koleksi Buku Terbaru RBTC" pada halaman "Beranda"<br><br>
-    <strong>Tambah, hapus dan mengubah data peminjaman buku:</strong><br>- Untuk mengakses fungsi ini, perlu login sebagai admin terlebih dahulu dengan cara :<br>- Klik tombol login di sebelah pojok kanan atas<br>- Masukkan Username dan Password<br>- Klik tombol "Login"<br><br>
-<strong>- Fungsi - fungsi di bawah ini dapat diakses melalui halaman "Beranda"</strong> <br><br>
-<strong> Tambah data peminjaman </strong><br>- Klik tombol "Tambah Data Peminjaman"<br>- Isikan data id buku, id peminjam dan tanggal peminjaman, lalu simpan<br>
-<br><strong> Hapus data peminjaman </strong> <br>- Lihat pada tabel tab "Action" dan klik tombol "Hapus" <br><br>
-<strong> Ubah / update status peminjaman </strong> <br>- Lihat pada tabel tab "Action" dan klik tombol Dikembalikan <br>
-      <!-- end isi -->
+      <table border="1" style="border-collapse: collapse;width: 100%;">
+        <tr style="background: #C9C9C9;">
+          <th width="5%" style="padding-top: 10px;padding-bottom: 10px">No.</th>
+          <th width="17%" style="padding-top: 10px;padding-bottom: 10px">Kode Buku</th>
+          <th width="34%" style="padding-top: 10px;padding-bottom: 10px">Peminjam</th> 
+          <th width="14%">Tanggal Peminjaman</th>
+          <th width="14%">Tenggat Pengembalian</th>
+          <th width="14%">Tanggal Pengembalian</th>
+          <!-- <th width="16%">Action</th> -->
+        </tr>
+        <tbody style="background: #FCFCFC;">
+          <?php 
+            $no=1;
+            foreach($data as $row): 
+          ?>
+          <tr>   
+              <td style="text-align: center;"><?php echo $no++; ?></td>
+              <td style="padding-left: 10px"><a href="<?php echo "http://localhost/mppl/index.php/ctr/detailbuku/".$row['id'];?>"><?php echo $row['kode']; ?></a></td>
+              <td style="padding-left: 10px"><?php echo $row['nama']; ?></td>
+              <td style="text-align: center;"><?php echo $row['peminjaman']; ?></td>
+              <td style="text-align: center;"><?php echo $row['tenggat']; ?></td>
+              <td style="text-align: center;"><?php echo $row['pengembalian']; ?></td>
+          </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
 
       <div  class="w3-section w3-bottombar w3-padding-16" align="center">
       </div>

@@ -7,6 +7,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="http://localhost/mppl/style.css">
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
 
 <style>
   /* Full-width input fields */
@@ -133,8 +136,8 @@
   </div>
   <div class="w3-bar-block" style="margin-left: 10px">
     <a href="#"w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>Beranda</a> 
-    <a href="http://localhost/mppl/index.php/ctr/databukupage" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>Data Buku</a>
-    <a href="http://localhost/mppl/index.php/ctr/grafikpeminjaman" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Grafik Peminjaman</a>
+    <a href="http://localhost/mppl/index.php/ctr/databukupage" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-book fa-fw w3-margin-right"></i>Data Buku</a>
+    <a href="http://localhost/mppl/index.php/ctr/grafikpeminjaman" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bar-chart fa-fw w3-margin-right"></i>Data Peminjaman</a>
      <a href="http://localhost/mppl/index.php/ctr/usermanual" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>User Manual</a>
     <hr>
   </div>
@@ -153,22 +156,15 @@
 <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- !PAGE CONTENT! -->
-  <div class="w3-main" style="margin-left:250px">
+<div class="w3-main" style="margin-left:250px">
 
   <!-- Navigationbar -->
   <div style="background: #6E6E6E;height: 54px;width: 100%">
-    <a style="font-size: 33px;padding-left: 20px;color: #f7f7f7;"><font face="Times New Roman">Data Peminjaman Buku RBTC</font></a>
+    <a style="font-size: 33px;padding-left: 20px;color: #f7f7f7;"><font face="Times New Roman">Selamat Datang di RBTC</font></a>
     <div style="margin-right: 16px;margin-top: 5px;float: right;">
-    <!-- <button class="dropbtn">Admin</button>
-      <div class="dropdown-content">
-        <a href="#">Profil</a>
-        <a href="#">Keluar</a>
-      </div> -->
       <button class="buttonn" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
     </div>
-
       <div id="id01" class="modal">
-        
         <form class="modal-content animate" action="http://localhost/mppl/index.php/login/aksi_login">
           <div class="container">
             <label><b>Username</b></label>
@@ -189,67 +185,54 @@
       </div>
 
   </div>
+
   <!-- Header -->
+
   <header id="portfolio">
     <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
     <div class="w3-container">
-    <img src="http://localhost/mppl/img/lib.jpg" style="height: 200px; width: 975px;margin-top: 17px;">
+    <img src="http://localhost/mppl/img/libr.jpg" style="height: 200px; width: 100%;margin-top: 17px;">
    <!--    <div style="padding-top: 20px; padding-bottom: 20px">
         <input type="text" name="search" placeholder="Search.."><!DOCTYPE html> -->
 
-      <div style="padding-top: 10px;padding-bottom: 10px">
-        <!-- <a href="<?php echo "http://localhost/mppl/index.php/ctr/insert_data_peminjaman/";?>"><button style="" name="subject" type="submit" value="HTML">Tambah Data Peminjaman</button></a> -->
-        <form style="" method="get" action="<?php echo "http://localhost/mppl/index.php/ctr/search_peminjaman/"?>">
-          <input type="text" class="textinput" name="cari" placeholder=" Cari nama peminjam..." style="width: 300px; height: 30px"><input type="submit" value="search" class="button">
-        </form>
-        <!-- <form action = "" method = "get">
-            <input type = "text" name = "searchkey" class = "box" placeholder="Search by name"/>
-            <input type = "submit" value = ""/>
-          </form> -->
-      </div>
+        <div style="position: relative;padding-top: 20px;height: 1500px">
+            <a href="http://localhost/mppl/index.php/ctr/koleksibuku/"><button type="button" style="padding: 10px;cursor: pointer;">Lihat Daftar Koleksi Buku Terbaru RBTC</button></a>
+          <div style="position: absolute;padding: 10px;width: 100%;">
+            <div id="container" style="min-width: 310px; height: 600px; margin: 0 auto"></div><br>
 
-      <table border="1" style="border-collapse: collapse;width: 100%;">
-        <tr style="background: #C9C9C9;">
-          <th width="5%" style="padding-top: 10px;padding-bottom: 10px">No.</th>
-          <th width="17%" style="padding-top: 10px;padding-bottom: 10px">Kode Buku</th>
-          <th width="34%" style="padding-top: 10px;padding-bottom: 10px">Peminjam</th> 
-          <th width="14%">Tanggal Peminjaman</th>
-          <th width="14%">Tenggat Pengembalian</th>
-          <th width="14%">Tanggal Pengembalian</th>
-          <!-- <th width="16%">Action</th> -->
-        </tr>
-        <tbody style="background: #FCFCFC;">
-          <?php 
-            $no=1;
-            foreach($data as $row): 
-          ?>
-          <tr>   
-              <td style="text-align: center;"><?php echo $no++; ?></td>
-              <td style="text-align: center;"><?php echo $row['kode']; ?></td>
-              <td style="padding-left: 10px"><?php echo $row['nama']; ?></td>
-              <td style="text-align: center;"><?php echo $row['peminjaman']; ?></td>
-              <td style="text-align: center;"><?php echo $row['tenggat']; ?></td>
-              <td style="text-align: center;"><?php echo $row['pengembalian']; ?></td>
-              <!-- <td style="text-align: center;"> -->
-                
-                <!-- <a href="<?php echo "http://localhost/mppl/index.php/ctr/delete_data/".$row['id'];?>"><button type="button">Hapus</button></a> -->
-
-               <!-- <a href="<?php echo "http://localhost/mppl/index.php/ctr/dikembalikan/".$row['id_peminjaman'];?>"><button type="button">Dikembalikan</button></a> -->
-                <!-- <a href="#"><button type="button">Hapus</button></a> -->
-              <!-- </td> -->
-          </tr>
-          <?php endforeach; ?>
-        </tbody>
-      </table>
-
-      <div  class="w3-section w3-bottombar w3-padding-16" align="center">
-      </div>
+            <table id="datatable" style="border: 1px solid black;padding: 10px;background-color: white">
+                <thead>
+                  <tr>
+                      <!-- <th>No</th> -->
+                      <th>Data Buku</th>
+                      <!-- <th>Judul Buku</th> -->
+                      <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                    $no = 1;
+                    foreach($data as $data):
+                  ?>
+                  <tr>
+                      <td><?php echo '<strong>'.$no++.'. </strong>'.$data['kode']?></td>
+                      <td style="text-align: center;"><?php echo $data['total']?></td>
+                  </tr>
+                      <td>Judul: <a href="<?php echo "http://localhost/mppl/index.php/ctr/detailbuku/".$data['kode']?>"><?php echo $data['judul']?></a><br><br></td>
+                      <!-- <td>Detail</td> -->
+                  <?php endforeach; ?>
+                </tbody>
+            </table>
+          </div>
+        </div>
 
     </div>
   </header>
 
   <!-- Footer -->
+          <div style="position: relative;">
   <?php include 'footer.php' ?>
+          </div>
 
 <!-- End page content -->
 </div>
@@ -265,7 +248,28 @@
           modal.style.display = "none";
       }
   }
+
+  Highcharts.chart('container', {
+      data: {
+          table: 'datatable'
+      },
+      chart: {
+          type: 'column'
+      },
+      title: {
+          text: 'Grafik Peminjaman Buku Terbanyak'
+      },
+      yAxis: {
+          allowDecimals: true,
+          title: {
+              text: 'Total Peminjaman'
+          }
+      },
+      tooltip: {
+      }
+  });
 </script>
+
 
 </body>
 </html>

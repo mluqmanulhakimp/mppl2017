@@ -155,54 +155,6 @@ class Admin_ctr extends CI_Controller {
 		}
 	}
 
-	// public function delete_data_buku($id){
-	// 	$where = array(
-	// 		'id_buku' => $id
-	// 	);
-	// 	$cek = $this->mymodel->deletedata('buku',$where);
-	// 	if($cek>=1){
-	// 		$this->load->helper('url');
-	// 		redirect('/ctr/databukupage');
-	// 	}
-	// }
-
-	// public function edit_data_buku($idbuku){
-	// 	$buku = $this->mymodel->getdatabuku("
-	//     	select b.id_buku as id_buku, b.judul as judul, b.edisi as edisi, b.pengarang as pengarang, k.nama_kategori as kategori from buku b, kategori k where id_buku = '$idbuku' and b.kategori = k.id_kategori
-	//     ");
-	//     $data = array(
-	//     	"idbuku" => $buku[0]['id_buku'],
-	//     	"judul" => $buku[0]['judul'],
-	//     	"edisi" => $buku[0]['edisi'],
-	//     	"pengarang" => $buku[0]['pengarang'],
-	//     	"kategori" => $buku[0]['kategori'],
-	//     );
-	// 	$this->load->view('form_edit_data_buku', array('data' => $data));
-	// // }
-
-	// public function do_edit_data_buku($idbuku){
-	// 	$namakategori = $this->input->post('kategori');
-	// 	$kategori = $this->mymodel->cekkategori($namakategori);
-	// 	// echo $kategori;
-	// 	if(is_null($kategori)){
-	// 		echo "Kategori yang anda cari tidak ditemukan!";
-	// 	}
-	// 	else{
-	// 		$judul = $this->input->post('judul');
-	// 		$edisi = $this->input->post('edisi');
-	// 		$pengarang = $this->input->post('pengarang');
-	// 		$data_insert = array(
-	// 			'judul' => $judul,
-	// 			'edisi' => $edisi,
-	// 			'pengarang' => $pengarang,
-	// 			'kategori' => $kategori
-	// 		);
-	// 		$this->mymodel->editdata('buku', $data_insert, $idbuku);
-	// 		$this->load->helper('url');
-	// 		redirect('/ctr/databukupage');
-	// 	}
-	// }
-
 	public function search_peminjaman(){
 	    $keyword = $this->input->get('cari');
 	    $data = $this->mymodel->searchpeminjaman($keyword);
@@ -214,5 +166,17 @@ class Admin_ctr extends CI_Controller {
 		// echo $cari;
 		$search = $this->mymodel->searchbuku($cari);
 		$this->load->view('admin_data_bukusearch', array('data' => $search));
+	}
+
+	public function bukubelumkembali(){
+		$data = $this->mymodel->getdetailbuku("
+			select l.item_code as kode, s.item_id as id, m.member_name as peminjam, l.due_date as tenggat
+			from loan l, member m, stock_take_item s
+			where l.is_return = 0
+			and l.member_id = m.member_id
+			and s.item_code = l.item_code
+			order by l.loan_date desc
+		");
+		$this->load->view('admin_buku_terpinjam', array('data' => $data));
 	}
 }
