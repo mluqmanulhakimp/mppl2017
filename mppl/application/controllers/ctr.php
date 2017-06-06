@@ -15,8 +15,8 @@ class Ctr extends CI_Controller {
 		// $this->load->view('home', array('data' => $data));
 		// // $this->load->view('form_login');
 		$data = $this->mymodel->getdetailbuku("
-	    	select kode, judul, count(judul) AS total
-			from (select a.item_code as kode, b.title as judul FROM loan a, stock_take_item b WHERE a.item_code=b.item_code) as peminjaman
+	    	select kode, judul, count(judul) AS total, id
+			from (select a.item_code as kode, b.item_id as id, b.title as judul FROM loan a, stock_take_item b WHERE a.item_code=b.item_code) as peminjaman
 			group by judul
 			order by total desc
 			limit 0,10

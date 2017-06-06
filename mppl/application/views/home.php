@@ -218,7 +218,7 @@
                       <td><?php echo '<strong>'.$no++.'. </strong>'.$data['kode']?></td>
                       <td style="text-align: center;"><?php echo $data['total']?></td>
                   </tr>
-                      <td>Judul: <a href="<?php echo "http://localhost/mppl/index.php/ctr/detailbuku/".$data['kode']?>"><?php echo $data['judul']?></a><br><br></td>
+                      <td>Judul: <a href="<?php echo "http://localhost/mppl/index.php/ctr/detailbuku/".$data['id']?>"><?php echo $data['judul']?></a><br><br></td>
                       <!-- <td>Detail</td> -->
                   <?php endforeach; ?>
                 </tbody>
